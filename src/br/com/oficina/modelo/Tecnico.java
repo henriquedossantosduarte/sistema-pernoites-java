@@ -1,5 +1,7 @@
 package br.com.oficina.modelo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Tecnico {
@@ -50,27 +52,67 @@ public class Tecnico {
         return total;
     }
 
-    public void exibirRelatorioCompleto() {
-        System.out.println("------ RELATÓRIO DE CONFORMIDADE DE PERNOITES ------");
-        System.out.println("Eu, " + this.nome + ", portador do CPF " + this.cpf + ",");
-        System.out.println("declaro estar ciente e de acordo com o recebimento dos valores");
-        System.out.println("referentes às pernoites realizadas conforme detalhamento abaixo:");
-        System.out.println("----------------------------------------------------");
+    public void removerPernoite(int indice) {
+        pernoites.remove(indice);
+    }
 
-        for (Pernoite p : pernoites) {
-            System.out.println("Viagem para: " + p.getLocalidade());
-            System.out.println("Periodo: " + p.getDataSaida() + " até " + p.getDataRetorno());
-            System.out.println("Total de Noites: " + p.calcularQuantidadeNoites());
-            System.out.printf("Valor desta viagem: R$ %.2f%n", p.calcularValorTotal());
-            System.out.println("Comprovantes: " + p.getComprovante());
-            System.out.println("----------------------------------------------------");
-        }
-
-        System.out.printf("VALOR TOTAL A RECEBER: R$ %.2f%n", this.calcularTotalMensal());
-        System.out.println("----------------------------------------------------");
-        System.out.println("Assinatura do Técnico: ___________________________");
+    public void atualizarPernoite(int indice, Pernoite nova) {
+        pernoites.set(indice, nova);
     }
 
 
+    public void listarPernoites() {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        if (pernoites.isEmpty()) {
+            System.out.println("Nenhuma pernoite cadastrada.");
+            return;
+        }
+
+        for (int i = 0; i < pernoites.size(); i++) {
+            Pernoite p = pernoites.get(i);
+            System.out.println(i + " - " + p.getLocalidade()
+                    + " | " + p.getDataSaida().format(fmt)
+                    + " até " + p.getDataRetorno().format(fmt)
+                    + " | R$ " + String.format(java.util.Locale.forLanguageTag("pt-BR"), "%.2f", p.calcularValorTotal()));
+        }
+    }
+
+    public String gerarRelatorio(int mesAtual, int anoAtual) {
+        double total = 0;
+
+        StringBuilder sb = new StringBuilder();
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        sb.append("------ RELATÓRIO DE CONFORMIDADE DE PERNOITES ------\n");
+        sb.append("Eu, ").append(this.nome).append(", portador do CPF ").append(this.cpf).append(",\n");
+        sb.append("declaro estar ciente e de acordo com o recebimento dos valores\n");
+        sb.append("referentes às pernoites realizadas conforme detalhamento abaixo:\n");
+        sb.append("----------------------------------------------------\n");
+
+        for (Pernoite p : pernoites) {
+
+            if (p.getDataSaida().getMonthValue() == mesAtual &&
+                    p.getDataSaida().getYear() == anoAtual) {
+
+
+                sb.append("Viagem para: ").append(p.getLocalidade()).append("\n");
+                sb.append("Periodo: ").append(p.getDataSaida().format(fmt))
+                        .append(" até ").append(p.getDataRetorno().format(fmt)).append("\n");
+                sb.append("Total de Noites: ").append(p.calcularQuantidadeNoites()).append("\n");
+                sb.append("Valor desta viagem: R$ ").append(String.format(java.util.Locale.forLanguageTag("pt-BR"), "%.2f", p.calcularValorTotal())).append("\n");
+                sb.append("Comprovantes: ").append(p.getComprovante()).append("\n");
+                sb.append("----------------------------------------------------\n");
+
+                total += p.calcularValorTotal();
+            }
+        }
+
+        sb.append("VALOR TOTAL A RECEBER: R$ ").append(String.format(java.util.Locale.forLanguageTag("pt-BR"), "%.2f", total)).append("\n");
+        sb.append("----------------------------------------------------\n");
+        sb.append("Assinatura do Técnico: ___________________________\n");
+
+        return sb.toString();
+    }
 
 }

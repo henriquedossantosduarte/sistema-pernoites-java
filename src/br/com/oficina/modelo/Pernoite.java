@@ -57,4 +57,6 @@ public class Pernoite {
     public double calcularValorTotal() {
         return calcularQuantidadeNoites() * 50.00;
     }
+
+
 }

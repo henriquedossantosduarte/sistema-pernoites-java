@@ -1,0 +1,20 @@
+------ RELATÓRIO DE CONFORMIDADE DE PERNOITES ------
+Eu, ruan, portador do CPF 32141315235,
+declaro estar ciente e de acordo com o recebimento dos valores
+referentes às pernoites realizadas conforme detalhamento abaixo:
+----------------------------------------------------
+Viagem para: base sp
+Periodo: 02/03/2026 até 09/03/2026
+Total de Noites: 7
+Valor desta viagem: R$ 350,00
+Comprovantes: sp
+----------------------------------------------------
+Viagem para: base sp
+Periodo: 25/03/2026 até 27/03/2026
+Total de Noites: 2
+Valor desta viagem: R$ 100,00
+Comprovantes: fsd
+----------------------------------------------------
+VALOR TOTAL A RECEBER: R$ 450,00
+----------------------------------------------------
+Assinatura do Técnico: ___________________________
