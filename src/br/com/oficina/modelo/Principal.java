@@ -31,6 +31,7 @@ public class Principal {
             System.out.println("3. Gerar Relatório de Conformidade");
             System.out.println("4. Excluir Pernoite");
             System.out.println("5. Atualizar Pernoite");
+            System.out.println("6. Resumo Geral de Custos (Diretoria)");
             System.out.println("0. Sair do Sistema");
             System.out.print("Escolha uma opção: ");
 
@@ -158,10 +159,44 @@ public class Principal {
                         salvarDados(listaTecnicos);
                         System.out.println("✅ Pernoite atualizada com sucesso!");
                     }
+                    break;case 6:
+                    System.out.println("\n========== RESUMO GERAL DE CUSTOS ==========");
+                    if (listaTecnicos.isEmpty()) {
+                        System.out.println("Não há técnicos cadastrados.");
+                    } else {
+                        System.out.print("Mês de referência (1-12): ");
+                        int mesResumo = Integer.parseInt(teclado.nextLine());
+                        System.out.print("Ano de referência: ");
+                        int anoResumo = Integer.parseInt(teclado.nextLine());
+
+                        double totalGeralEmpresa = 0;
+
+                        System.out.println("\n-------------------------------------------");
+                        for (Tecnico t : listaTecnicos) {
+                            double totalTecnico = t.calcularTotalDoMes(mesResumo, anoResumo);
+                            int qtdPernoites = t.contarPernoitesDoMes(mesResumo, anoResumo);
+
+                            if (totalTecnico > 0) {
+                                System.out.println("Técnico: " + t.getNome());
+                                System.out.println("Qtd Pernoites: " + qtdPernoites);
+                                System.out.println("Custo: R$ " + String.format("%.2f", totalTecnico));
+                                System.out.println("-------------------------------------------");
+                                totalGeralEmpresa += totalTecnico;
+                            }
+                        }
+
+                        if (totalGeralEmpresa == 0) {
+                            System.out.println("Nenhum custo registrado para este período.");
+                        } else {
+                            System.out.println(">>> TOTAL GERAL DA EMPRESA: R$ " + String.format("%.2f", totalGeralEmpresa));
+                        }
+                    }
                     break;
             }
 
         } while (opcao != 0);
+
+
 
         teclado.close();
     }

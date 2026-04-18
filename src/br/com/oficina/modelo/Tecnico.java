@@ -78,6 +78,26 @@ public class Tecnico {
         }
     }
 
+    public double calcularTotalDoMes(int mes, int ano) {
+        double total = 0;
+        for (Pernoite p : pernoites) {
+            if (p.getDataSaida().getMonthValue() == mes && p.getDataSaida().getYear() == ano) {
+                total += p.calcularValorTotal();
+            }
+        }
+        return total;
+    }
+
+    public int contarPernoitesDoMes(int mes, int ano) {
+        int contador = 0;
+        for (Pernoite p : pernoites) {
+            if (p.getDataSaida().getMonthValue() == mes && p.getDataSaida().getYear() == ano) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+
     public String gerarRelatorio(int mesAtual, int anoAtual) {
         double total = 0;
 
