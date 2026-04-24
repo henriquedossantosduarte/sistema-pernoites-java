@@ -1,7 +1,17 @@
 T;Carlos Enrique Guevara Alvarez;706.609.692-46
+P;2026-04-01;2026-04-03;Lar cascavel;saida 7:08
+P;2026-04-10;2026-04-16;rivelli;saida da base sp 7:40
+P;2026-04-21;2026-04-24;base cx;base cx
 T;Felipe Torres Weiss;101.216.499-38
+P;2026-04-01;2026-04-03;agro alimentos;base sp
+P;2026-04-06;2026-04-10;base sp;base sp
+P;2026-04-14;2026-04-17;base sp;base sp
 T;Joel Soares de Jesus;160.846.516-07
 T;John Carlos Roca Perez;115.815.242-69
 T;Lucas da Silva Seben;034.055.530-08
+P;2026-04-01;2026-04-03;base cx;saida 6:12
+P;2026-04-01;2026-04-03;base cx;base cx
+P;2026-04-06;2026-04-17;base cx;base cx
+P;2026-04-21;2026-04-24;koch;base cx
 T;Oriel Pereira da Silva Junior;024.337.939-04
 T;Victor Gabriel Proença da Silva;141.487.239.97
