@@ -23,6 +23,15 @@ public class Principal {
 
         ArrayList<Tecnico> listaTecnicos = carregarDados();
         int opcao = -1;
+        if (listaTecnicos.isEmpty()) {
+            listaTecnicos.add(new Tecnico("Carlos Enrique Guevara Alvarez", "706.609.692-46"));
+            listaTecnicos.add(new Tecnico("Felipe Torres Weiss", "101.216.499-38"));
+            listaTecnicos.add(new Tecnico("Joel Soares de Jesus", "160.846.516-07"));
+            listaTecnicos.add(new Tecnico("John Carlos Roca Perez", "115.815.242-69"));
+            listaTecnicos.add(new Tecnico("Lucas da Silva Seben", "034.055.530-08"));
+            listaTecnicos.add(new Tecnico("Oriel Pereira da Silva Junior", "024.337.939-04"));
+            listaTecnicos.add(new Tecnico("Victor Gabriel Proença da Silva", "141.487.239.97"));
+        }
 
         do {
             System.out.println("\n========== SISTEMA DE PERNOITES ==========");

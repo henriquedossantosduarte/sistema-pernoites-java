@@ -99,40 +99,52 @@ public class Tecnico {
     }
 
     public String gerarRelatorio(int mesAtual, int anoAtual) {
+
         double total = 0;
+        int totalPernoites = 0;
 
-        StringBuilder sb = new StringBuilder();
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        StringBuilder dias = new StringBuilder();
 
-        sb.append("------ RELATÓRIO DE CONFORMIDADE DE PERNOITES ------\n");
-        sb.append("Eu, ").append(this.nome).append(", portador do CPF ").append(this.cpf).append(",\n");
-        sb.append("declaro estar ciente e de acordo com o recebimento dos valores\n");
-        sb.append("referentes às pernoites realizadas conforme detalhamento abaixo:\n");
-        sb.append("----------------------------------------------------\n");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd");
 
         for (Pernoite p : pernoites) {
-
             if (p.getDataSaida().getMonthValue() == mesAtual &&
                     p.getDataSaida().getYear() == anoAtual) {
 
-
-                sb.append("Viagem para: ").append(p.getLocalidade()).append("\n");
-                sb.append("Periodo: ").append(p.getDataSaida().format(fmt))
-                        .append(" até ").append(p.getDataRetorno().format(fmt)).append("\n");
-                sb.append("Total de Noites: ").append(p.calcularQuantidadeNoites()).append("\n");
-                sb.append("Valor desta viagem: R$ ").append(String.format(java.util.Locale.forLanguageTag("pt-BR"), "%.2f", p.calcularValorTotal())).append("\n");
-                sb.append("Comprovantes: ").append(p.getComprovante()).append("\n");
-                sb.append("----------------------------------------------------\n");
-
+                long noites = p.calcularQuantidadeNoites();
+                totalPernoites += noites;
                 total += p.calcularValorTotal();
+
+                dias.append(p.getDataSaida().format(fmt))
+                        .append(" a ")
+                        .append(p.getDataRetorno().format(fmt))
+                        .append(" ; ");
             }
         }
 
-        sb.append("VALOR TOTAL A RECEBER: R$ ").append(String.format(java.util.Locale.forLanguageTag("pt-BR"), "%.2f", total)).append("\n");
-        sb.append("----------------------------------------------------\n");
-        sb.append("Assinatura do Técnico: ___________________________\n");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Curitiba, ")
+                .append(LocalDate.now().format(DateTimeFormatter.ofPattern("dd 'de' MMMM yyyy")))
+                .append(".\n\n");
+
+        sb.append("RECIBO DIÁRIAS DE VIAGENS\n\n");
+
+        sb.append("Eu ").append(this.nome)
+                .append(" inscrito no CPF: ").append(this.cpf)
+                .append(" recebi da Teixpac Service Ltda situada na Rua João Reffo, 470 - Santa Felicidade, Curitiba - PR, 82410-000 ")
+                .append("inscrito no CNPJ sob o nº 35.644.378/0001-02, a quantia de R$ ")
+                .append(String.format(java.util.Locale.forLanguageTag("pt-BR"), "%.2f", total))
+                .append(" referente a ")
+                .append(totalPernoites)
+                .append(" pernoites realizadas nos dias: ")
+                .append(dias.toString())
+                .append("\n\n");
+
+        sb.append("____________________________________\n");
+        sb.append(this.nome).append("\n");
+        sb.append("Rua João Reffo, 470 - Santa Felicidade, Curitiba - PR\n");
 
         return sb.toString();
     }
-
 }
